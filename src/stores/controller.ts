@@ -17,7 +17,6 @@ import { type JoystickEvent, EventType, joystickManager, JoystickModel } from '@
 import { allAvailableAxes, allAvailableButtons } from '@/libs/joystick/protocols'
 import { modifierKeyActions, otherAvailableActions } from '@/libs/joystick/protocols/other'
 import {
-  type GamepadToCockpitStdMapping,
   type JoystickProtocolActionsMapping,
   type JoystickState,
   type ProtocolAction,
@@ -266,36 +265,6 @@ export const useControllerStore = defineStore('controller', () => {
     reader.readAsText(e.target.files[0])
   }
 
-  const exportJoysticksMappingsToVehicle = async (
-    vehicleAddress: string,
-    joystickMappings: { [key in JoystickModel]: GamepadToCockpitStdMapping }
-  ): Promise<void> => {
-    await setKeyDataOnCockpitVehicleStorage(vehicleAddress, cockpitStdMappingsKey, joystickMappings)
-    Swal.fire({ icon: 'success', text: 'Joystick mapping exported to vehicle.', timer: 3000 })
-  }
-
-  const importJoysticksMappingsFromVehicle = async (vehicleAddress: string): Promise<void> => {
-    const newMapping = await getKeyDataFromCockpitVehicleStorage(vehicleAddress, cockpitStdMappingsKey)
-    if (!newMapping) {
-      Swal.fire({ icon: 'error', text: 'No joystick mappings to import from vehicle.', timer: 3000 })
-      return
-    }
-    try {
-      Object.values(newMapping).forEach((mapping) => {
-        if (!mapping['name'] || !mapping['axes'] || !mapping['buttons']) {
-          throw Error('Invalid joystick mapping inside vehicle.')
-        }
-      })
-    } catch (error) {
-      Swal.fire({ icon: 'error', text: `Could not import joystick mapping from vehicle. ${error}`, timer: 3000 })
-      return
-    }
-
-    // @ts-ignore: We check for the necessary fields in the if before
-    cockpitStdMappings.value = newMapping
-    Swal.fire({ icon: 'success', text: 'Joystick mapping imported from vehicle.', timer: 3000 })
-  }
-
   const exportFunctionsMapping = (protocolActionsMapping: JoystickProtocolActionsMapping): void => {
     const blob = new Blob([JSON.stringify(protocolActionsMapping)], { type: 'text/plain;charset=utf-8' })
     saveAs(blob, `cockpit-std-profile-joystick-${protocolActionsMapping.name}.json`)
@@ -379,8 +348,6 @@ export const useControllerStore = defineStore('controller', () => {
     loadProtocolMapping,
     exportJoystickMapping,
     importJoystickMapping,
-    exportJoysticksMappingsToVehicle,
-    importJoysticksMappingsFromVehicle,
     exportFunctionsMapping,
     importFunctionsMapping,
     exportFunctionsMappingToVehicle,
