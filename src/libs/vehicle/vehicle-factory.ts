@@ -6,8 +6,8 @@ import { Signal } from '@/libs/signal'
 
 import { ArduCopter } from './ardupilot/arducopter'
 import { ArduPlane } from './ardupilot/arduplane'
-import { ArduRover } from './ardupilot/ardurover'
 import { ArduSub } from './ardupilot/ardusub'
+import { CustRover } from './ardupilot/custrover'
 import { PX4 } from './px4/px4'
 import * as Vehicle from './vehicle'
 
@@ -72,7 +72,8 @@ export class VehicleFactory {
       case Vehicle.Type.Plane:
         return new ArduPlane(system_id)
       case Vehicle.Type.Rover:
-        return new ArduRover(system_id)
+      case Vehicle.Type.CustRover:
+        return new CustRover(system_id)
       case Vehicle.Type.Sub:
         return new ArduSub(system_id)
       default:
@@ -148,7 +149,8 @@ function createArduPilotVehicle(heartbeat: Message.Heartbeat, system_id: number,
       break
     case MavType.MAV_TYPE_GROUND_ROVER:
     case MavType.MAV_TYPE_SURFACE_BOAT:
-      VehicleFactory.createVehicle(Vehicle.Firmware.ArduPilot, Vehicle.Type.Rover, system_id)
+      // needs fixing later for CustRover
+      VehicleFactory.createVehicle(Vehicle.Firmware.ArduPilot, Vehicle.Type.CustRover, system_id)
       break
     case MavType.MAV_TYPE_FLAPPING_WING:
     case MavType.MAV_TYPE_VTOL_TILTROTOR:

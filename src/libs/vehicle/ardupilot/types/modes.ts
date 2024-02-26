@@ -157,3 +157,18 @@ export enum BlimpMode {
   LOITER = 3,
   RTL = 4,
 }
+
+/**
+ * Custom modes for customRover
+ * There is no documentation from their source code
+ */
+export enum CustomRoverMode {
+  // Mode not set by vehicle yet
+  PRE_FLIGHT = -1,
+  MANUAL = 0,
+  ACRO = 1,
+  WStest = 3,
+  HOLD = 4,
+  // getPos = 5,
+  INITIALISING = 16,
+}
