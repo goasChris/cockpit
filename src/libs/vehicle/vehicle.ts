@@ -38,6 +38,7 @@ export enum Type {
   Plane = 'plane',
   Rover = 'rover',
   Sub = 'sub',
+  CustRover = 'custrover',
 }
 
 /**
@@ -164,6 +165,8 @@ export abstract class AbstractVehicle<Modes> {
         return 'mdi-airplane'
       case Type.Rover:
         return 'mdi-car-wireless'
+      case Type.CustRover:
+        return 'mdi-submarine'
       case Type.Sub:
         return 'mdi-submarine'
     }
