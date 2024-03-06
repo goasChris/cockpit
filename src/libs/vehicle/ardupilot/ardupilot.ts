@@ -316,12 +316,6 @@ export abstract class ArduPilotVehicle<Modes> extends Vehicle.AbstractVehicle<Mo
         this.onCommandAck.emit_value(ack)
         break
       }
-      case MAVLinkType.AHRS2: {
-        const ahrsMessage = mavlink_message.message as Message.Ahrs2
-        this._altitude.msl = ahrsMessage.altitude
-        this.onAltitude.emit()
-        break
-      }
       case MAVLinkType.ATTITUDE: {
         const attitude = mavlink_message.message as Message.Attitude
         this._attitude.roll = attitude.roll
@@ -334,8 +328,9 @@ export abstract class ArduPilotVehicle<Modes> extends Vehicle.AbstractVehicle<Mo
         const position = mavlink_message.message as Message.GlobalPositionInt
         this._coordinates.precision = 1
         this._coordinates.altitude = position.alt / 1000 // (mm to meters)
-        this._coordinates.latitude = position.lat / 1e7 // DegE7 to Deg
-        this._coordinates.longitude = position.lon / 1e7 // DegE7 to Deg
+        this._altitude.msl = position.alt / 1000 // evil :)
+        this._coordinates.latitude = position.lat / 1000 // DegE7 to Deg evil
+        this._coordinates.longitude = position.lon / 100 // DegE7 to Deg unknown
         this.onPosition.emit()
         this._velocity.x = position.vx / 100 // Convert cm/s to m/s
         this._velocity.y = position.vy / 100 // Convert cm/s to m/s
