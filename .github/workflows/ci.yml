@@ -94,7 +94,7 @@ jobs:
           bun deploy:electron
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cockpit-${{ matrix.suffix }}
           path: dist/Cockpit*.${{ matrix.extension }}
@@ -139,7 +139,7 @@ jobs:
           env DEBUG="@malept/flatpak-bundler" bun deploy:flatpak
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cockpit-flatpak
           path: dist/Cockpit*.flatpak
