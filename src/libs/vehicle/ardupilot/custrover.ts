@@ -17,7 +17,7 @@ export enum CustomMode {
   ACRO = 1,
   WStest = 3,
   HOLD = 4,
-  getPos = 5,
+  // getPos = 5,
   INITIALISING = 16,
 }
 
