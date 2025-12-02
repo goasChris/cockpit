@@ -6,7 +6,6 @@ import { Signal } from '@/libs/signal'
 
 import { ArduCopter } from './ardupilot/arducopter'
 import { ArduPlane } from './ardupilot/arduplane'
-import { ArduRover } from './ardupilot/ardurover'
 import { ArduSub } from './ardupilot/ardusub'
 import { PX4 } from './px4/px4'
 import { CustRover } from './ardupilot/custrover'
@@ -73,7 +72,6 @@ export class VehicleFactory {
       case Vehicle.Type.Plane:
         return new ArduPlane(system_id)
       case Vehicle.Type.Rover:
-        return new ArduRover(system_id)
       case Vehicle.Type.CustRover:
         return new CustRover(system_id)
       case Vehicle.Type.Sub:
