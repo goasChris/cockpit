@@ -101,6 +101,7 @@ export enum WidgetType {
 export enum MiniWidgetType {
   Alerter = 'Alerter',
   ArmerButton = 'ArmerButton',
+  ParamToggle = 'ParamToggle',
   BaseCommIndicator = 'BaseCommIndicator',
   BatteryIndicator = 'BatteryIndicator',
   ChangeAltitudeCommander = 'ChangeAltitudeCommander',
@@ -860,6 +861,7 @@ export const isWidgetConfigurable: Record<WidgetType, boolean> = {
 export const isMiniWidgetConfigurable: Record<MiniWidgetType, boolean> = {
   [MiniWidgetType.Alerter]: true,
   [MiniWidgetType.ArmerButton]: false,
+  [MiniWidgetType.ParamToggle]: true,
   [MiniWidgetType.BaseCommIndicator]: false,
   [MiniWidgetType.BatteryIndicator]: true,
   [MiniWidgetType.ChangeAltitudeCommander]: false,
