@@ -7,8 +7,8 @@ import { Signal } from '@/libs/signal'
 import { ArduCopter } from './ardupilot/arducopter'
 import { ArduPlane } from './ardupilot/arduplane'
 import { ArduSub } from './ardupilot/ardusub'
-import { PX4 } from './px4/px4'
 import { CustRover } from './ardupilot/custrover'
+import { PX4 } from './px4/px4'
 import * as Vehicle from './vehicle'
 
 /**

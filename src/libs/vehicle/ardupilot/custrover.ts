@@ -5,35 +5,21 @@ import * as custrover_metadata from '@/libs/vehicle/ardupilot/ParameterRepositor
 
 import * as Vehicle from '../vehicle'
 import { ArduPilotVehicle } from './ardupilot'
+import { CustomRoverMode as CustomMode } from './types/modes'
 
 /**
- * Custom modes for customRover
- * There is no documentation from their source code
- */
-export enum CustomMode {
-  // Mode not set by vehicle yet
-  PRE_FLIGHT = -1,
-  MANUAL = 0,
-  ACRO = 1,
-  WStest = 3,
-  HOLD = 4,
-  // getPos = 5,
-  INITIALISING = 16,
-}
-
-/**
- * custRover vehicle
+ * CustRover vehicle
  */
 export class CustRover extends ArduPilotVehicle<CustomMode> {
   _mode: CustomMode = CustomMode.PRE_FLIGHT
   _metadata = custrover_metadata
 
   /**
-   * Create CustRober vehicle
+   * Create CustRover vehicle
    * @param {number} system_id
    */
   constructor(system_id: number) {
-    super(Vehicle.Type.CustRover, system_id)
+    super(Vehicle.Type.CustRover, system_id, CustomMode)
   }
 
   /**
