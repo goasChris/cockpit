@@ -64,7 +64,7 @@ export const useMissionStore = defineStore('mission', () => {
 
   const currentPlanningWaypoints = reactive<Waypoint[]>([])
   const persistedPositionHistory = useBlueOsStorage<WaypointCoordinates[]>('cockpit-vehicle-position-history', [])
-  const isVehiclePositionHistoryPersistent = useBlueOsStorage('cockpit-vehicle-position-history-persistent', true)
+  const isVehiclePositionHistoryPersistent = useBlueOsStorage('cockpit-vehicle-position-history-persistent', false) // Chris hack, dont want persistent storage
   const vehiclePositionHistory = ref<WaypointCoordinates[]>([...persistedPositionHistory.value])
 
   const flushPositionHistory = (): void => {
